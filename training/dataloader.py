@@ -159,12 +159,16 @@ class CropArTfm(object):
         return torchvision.transforms.functional.center_crop(img, size)
 
 import os.path
+import PIL
 def sort_ar(valdir):
     idx2ar_file = valdir+'/../sorted_idxar.p'
     if os.path.isfile(idx2ar_file): return pickle.load(open(idx2ar_file, 'rb'))
     print('Creating AR indexes. Please be patient this may take a couple minutes...')
-    val_dataset = datasets.ImageFolder(valdir) # AS: TODO: use Image.open instead of looping through dataset
-    sizes = [img[0].size for img in tqdm(val_dataset, total=len(val_dataset))]
+    val_dataset = datasets.ImageFolder(valdir)
+    sizes = []
+    for path in tqdm(val_dataset.samples, total=len(val_dataset)):
+        with PIL.Image.open(path[0]) as fp:
+            sizes.append(fp.size)
     idx_ar = [(i, round(s[0]/s[1], 5)) for i,s in enumerate(sizes)]
     sorted_idxar = sorted(idx_ar, key=lambda x: x[1])
     pickle.dump(sorted_idxar, open(idx2ar_file, 'wb'))
