@@ -1,4 +1,4 @@
-Code to reproduce ImageNet in 18 minutes, by Andrew Shaw, Yaroslav Bulatov, and Jeremy Howard. High-level overview of techniques used is [here](http://fast.ai/2018/08/10/fastai-diu-imagenet/)
+Code to reproduce ImageNet in 18 minutes, by Andrew Shaw, Yaroslav Bulatov, and Jeremy Howard. High-level overview of techniques used is ([here](https://docs.google.com/document/d/14v6elpz12Nm5VwSVYbQym0Sbsl0I6UbqV3-SYaLzyTc/edit#heading=h.b2wwp49hhjut), Yaroslav) and ([here](http://fast.ai/2018/08/10/fastai-diu-imagenet/), fast.ai)
 
 
 Pre-requisites: Python 3.6 or higher
