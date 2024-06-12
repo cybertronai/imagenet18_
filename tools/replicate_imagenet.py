@@ -41,6 +41,7 @@ parser.add_argument('--snapshot', type=str, default='imagenet18-backup')
 parser.add_argument('--volume_offset', type=int, default=0, help='start numbering with this value')
 parser.add_argument('--size_gb', type=int, default=0, help="size in GBs")
 parser.add_argument('--delete', action='store_true', help="delete volumes instead of creating")
+parser.add_argument('--zone', default=None)
 
 args = parser.parse_args()
 
@@ -59,7 +60,10 @@ def create_volume_tags(name):
 
 def main():
     ec2 = u.get_ec2_resource()
-    zone = u.get_zone()
+    if args.zone is None:
+        zone = u.get_zone()
+    else:
+        zone = args.zone
 
     # use filtering by description since Name is not public
     # snapshots = list(ec2.snapshots.filter(Filters=[{'Name': 'description', 'Values': [args.snapshot]},
